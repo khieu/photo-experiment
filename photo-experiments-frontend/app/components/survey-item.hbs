@@ -1,0 +1,18 @@
+<h1>Hello</h1>
+<div>
+	<span><img src={{this.url}} alt="something" width="500" height="600"></span>
+	<span>
+		{{#each this.options as |option|}}
+		    <div>
+				<input
+					onChange={{action onSelect option}}
+					type="radio"
+					name="object-group"/>
+				<span>{{option}}</span>
+		    </div>
+		{{/each}}
+		<button onClick={{action onSubmit}}>
+			Submit
+		</button>
+	</span>
+</div>
