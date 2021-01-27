@@ -2,13 +2,19 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { SOLUTIONS } from '../constants/solutions'
 import fetch from 'fetch';
+import ENV from 'photo-experiments-frontend/config/environment';
+
 
 export default class SurveyItem extends Component {
 	backendAddress = 'http://localhost:3000';
 
 	item = null;
 
-	totalItem = Object.keys(SOLUTIONS).length;
+	solutions = ENV.solutions;
+
+	totalItems = Object.keys(ENV.solutions).length;
+
+	totalOptionsForEachItem = 6; // the total number of options to choose
 
 	url = '/images/'
 
@@ -19,13 +25,13 @@ export default class SurveyItem extends Component {
 
 	constructor(){
 		super(...arguments);
-		this.item = Math.floor(Math.random() * this.totalItem); // the id of the image
+		this.item = Math.floor(Math.random() * this.totalItems); // the id of the image
 		this.url = this.url + `${this.item}.png`; // the url of the image from the public/images folder
-		this.numOptions = SOLUTIONS[this.item].totalOptions; // the total number of options to choose
-		this.solution = SOLUTIONS[this.item].solution; // the solution
+		this.solution = this.solutions[this.item]; // the solution
 
-		const arr = Array.apply(null, Array(this.numOptions));
+		const arr = Array.apply(null, Array(this.totalOptionsForEachItem));
         this.options = arr.map(function (x, i) { return i });
+        console.log(this.solutions);
 	}
 
 	@action

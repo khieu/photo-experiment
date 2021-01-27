@@ -1,4 +1,5 @@
 'use strict';
+const fs = require('fs');
 
 module.exports = function (environment) {
   let ENV = {
@@ -46,6 +47,8 @@ module.exports = function (environment) {
   if (environment === 'production') {
     // here you can enable a production-specific feature
   }
-
+  ENV.solutions = JSON.parse(
+    fs.readFileSync('public/data/solutions.json')
+  );
   return ENV;
 };
