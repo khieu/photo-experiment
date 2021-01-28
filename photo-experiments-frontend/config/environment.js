@@ -50,5 +50,8 @@ module.exports = function (environment) {
   ENV.solutions = JSON.parse(
     fs.readFileSync('public/data/solutions.json')
   );
+  ENV.ref_expressions = JSON.parse(
+    fs.readFileSync('public/data/generated_expressions.json')
+  );
   return ENV;
 };
